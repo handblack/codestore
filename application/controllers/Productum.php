@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Productum extends MY_Controller {
+class Productum extends MY_Crud {
 
     private $data;
     private $APPNAME = 'Unidad de Medida [UM]';
@@ -10,8 +10,8 @@ class Productum extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('db/xdb');
-        $this->xdb->set_tablename('dt_unitme');
-        $this->xdb->set_keyfield('unitme_id');
+        $this->xdb->set_tablename('dt_um');
+        $this->xdb->set_keyfield('um_id');
         // No modificar debajo de esta linea
         $this->data['APPNAME'] = $this->APPNAME;
         $this->load->library('form_validation');
@@ -21,14 +21,15 @@ class Productum extends MY_Controller {
 
     public function index() {
         $this->data['result'] = $this->xdb->get_list();
-        $this->_render(_PATH.'/'.$this->router->fetch_class(), $this->data);
+        $menu = '';
+        $this->_render(_PATH.'/'.$this->router->fetch_class(), $this->data,$menu);
     }
 
     public function edit($id = '') {
         $this->data['row'] = $this->dt_sequence->get_id($id);
         $this->form_validation->set_rules('sequencename', 'Nombre del secuenciador', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->_render('sequence/formulario', $this->data);
+            $this->_render(_PATH.'um/formulario', $this->data);
         } else {
             $row['sequencename'] = $this->input->post('sequencename');
             $row['serial'] = $this->input->post('serial');

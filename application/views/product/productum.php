@@ -16,7 +16,7 @@ $this->session->unset_userdata('_succes_message');
     <div class="row">
         <div class="col-sm-7 col-xs-6">
             <div class="btn-group hidden-xs">
-                <a class="btn btn-sm btn-default" href="<?php echo _PATH;?>" title="Recargar la página">
+                <a class="btn btn-sm btn-default" href="<?php echo _PATH.'um';?>" title="Recargar la página">
                     <span class="glyphicon glyphicon-refresh"></span> 
                 </a>
 
@@ -39,14 +39,35 @@ $this->session->unset_userdata('_succes_message');
         </div>
     </div>
 </div>
-
+<style>
+    table{width: 100%}
+    th {
+        background-color: #2d89ef;
+        color: white;
+        font-weight:normal;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+    tr{
+        font-size: 11px;
+    }
+</style>
 
 <?php 
 $html = '';
-$html .= '<table class="table table-hover">';
+$html .= '<table class="table table-hover table-condensed" border="1">';
+$html .= '<thead>';
+$html .= '<th>UM</th>';
+$html .= '<th>ISO</th>';
+$html .= '<th>Activo</th>';
+$html .= '<th>Actualizado</th>';
+$html .= '</thead>';
 foreach ($result as $row) {
-    $lnk = site_url(_PATH.'/edit') . '/' . $row->unitme_id;
+    $lnk = site_url(_PATH.'um/edit') . '/' . $row->unitme_id;
     $html .= "<tr class='clickableRow' href=\"$lnk\">";
+    foreach($row as $field => $value){
+        $html .= "<td>{$value}</td>";
+    }
     $html .= "<td>{$row->unitmename}</td>";
     $html .= "<td>{$row->unitmevalue}</td>";
     $html .= "<td>{$row->isactive}</td>";

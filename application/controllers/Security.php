@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Security extends CI_Controller {
+class Security extends MY_Controller{
 
     private $data;
 
@@ -21,7 +21,8 @@ class Security extends CI_Controller {
         $this->form_validation->set_rules('username', 'Product title', 'trim|required');
         $this->form_validation->set_rules('userpass', 'Product description', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('security/login', $this->data);
+            //$this->load->view('security/login', $this->data);
+            $this->_render_home('security/login', $this->data);
         } else {
             $user = $this->input->post('username');
             $pass = $this->input->post('userpass');

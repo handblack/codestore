@@ -11,6 +11,7 @@ class MY_Controller extends CI_Controller{
         $this->load->view($vista,$param);
         $this->load->view('homepage/footer');
     }
+
     public function _render($vista,$param = false){
         $this->load->view('dashboard/header');
         $this->load->view($vista,$param);
