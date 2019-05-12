@@ -57,7 +57,7 @@ class Xdb extends CI_Model {
     }
 
     public function record_update($data){
-        var_dump($data);
+        //var_dump($data);
         $this->db->where($this->keyfield, $data[$this->keyfield]);
         $result=$this->db->update($this->tablename, $data);
         return $result;

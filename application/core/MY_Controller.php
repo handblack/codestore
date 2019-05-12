@@ -3,6 +3,8 @@
 class MY_Controller extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->load->model('db/xdb');
+        $this->load->library('form_validation');
     }
     public function _render_home($vista,$param = false){
         $this->load->helper(array('form'));
@@ -17,5 +19,11 @@ class MY_Controller extends CI_Controller{
         $this->load->view($vista,$param);
         $this->load->view('dashboard/footer');
     }
+    public function _crud($vista, $param = false) {
+        $this->load->view('dashboard/crud_header');
+        $this->load->view($vista, $param);
+        $this->load->view('dashboard/crud_footer');
+    }
+   
 
 }
